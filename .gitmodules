@@ -1,0 +1,12 @@
+[submodule "CI2024_lab1"]
+	path = CI2024_lab1
+	url = https://github.com/CodeClimberNT/CI2024_lab1
+[submodule "CI2024_lab2"]
+	path = CI2024_lab2
+	url = https://github.com/CodeClimberNT/CI2024_lab2
+[submodule "CI2024_lab3"]
+	path = CI2024_lab3
+	url = https://github.com/CodeClimberNT/CI2024_lab3
+[submodule "CI2024_lab3F"]
+	path = CI2024_lab3F
+	url = https://github.com/CodeClimberNT/CI2024_lab3F
