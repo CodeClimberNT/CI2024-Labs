@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs every two weeks
     - cron: "0 0 */14 * *"
+  workflow_dispatch:
 
 jobs:
   run-scripts:
