@@ -36,21 +36,22 @@ jobs:
 
       - name: Run add_submodule script
         id: add_submodule
+        continue-on-error: true
         run: |
           python scripts/add_submodule.py
 
       - name: Run populate_md script
-        if: steps.add_submodule.outcome == 'success'
+        if: steps.add_submodule.conclusion == 'success'
         run: |
           python scripts/populate_md.py
-
+        
       - name: Commit changes
-        if: steps.add_submodule.outcome == 'success'
+        if: steps.add_submodule.conclusion == 'success'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add README.md
-          git commit -m 'Update README.md with new lab links'
+          git diff --quiet || git add README.md
+          git diff --cached --quiet || git commit -m 'Update README.md with new lab links'
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
