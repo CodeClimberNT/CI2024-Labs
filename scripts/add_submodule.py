@@ -6,10 +6,16 @@ def add_submodule(lab_number):
     repo_dir = os.path.abspath(os.path.join(script_dir, ".."))
     lab_name = f"CI2024_lab{lab_number}"
     lab_url = f"https://github.com/CodeClimberNT/{lab_name}"
+    lab_path = os.path.join(repo_dir, lab_name)
+
+    # Check if the submodule already exists
+    if os.path.exists(lab_path):
+        print(f"Submodule {lab_name} already exists.")
+        return False
 
     try:
         # Add the submodule
-        subprocess.run(["git", "submodule", "add", lab_url, os.path.join(repo_dir, lab_name)], check=True)
+        subprocess.run(["git", "submodule", "add", lab_url, lab_path], check=True)
     except subprocess.CalledProcessError:
         print(f"Failed to add submodule {lab_name}. Repository may not exist.")
         return False
@@ -34,3 +40,4 @@ if __name__ == "__main__":
         print(f"Successfully added CI2024_lab{next_lab_number}")
     else:
         print(f"Failed to add CI2024_lab{next_lab_number}")
+        exit(1)
