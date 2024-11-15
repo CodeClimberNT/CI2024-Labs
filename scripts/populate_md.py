@@ -1,5 +1,5 @@
 import os
-
+import re
 
 def populate_readme():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,13 +31,20 @@ def populate_readme():
     lab_links = [f"- [{lab}]({lab}/README.md)\n" for lab in existing_labs]
 
     # Sort the lab links
-    lab_links.sort(key=lambda x: int(x.split("CI2024_lab")[1].split("]")[0]))
-    
+    def sort_key(lab_link):
+        match = re.match(r"- \[CI2024_lab(\d+)([A-Za-z]*)\]", lab_link)
+        if match:
+            number = int(match.group(1))
+            suffix = match.group(2)
+            return (number, suffix)
+        return (0, "")
+
+    lab_links.sort(key=sort_key)
+
     # Add a new line at the start and two lines at the end of the list
     lab_links.insert(0, "\n")
     lab_links.append("\n")
     lab_links.append("\n")
-
 
     # Update the lines with sorted lab links
     lines = lines[: start_index + 1] + lab_links + lines[end_index:]
