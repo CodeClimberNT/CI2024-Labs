@@ -1,4 +1,4 @@
-name: Add Submodule and Update README.md
+name: Repository Sync
 
 on:
   schedule:
@@ -52,6 +52,16 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git diff --quiet || git add README.md
           git diff --cached --quiet || git commit -m 'Update README.md with new lab links'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Record last successful run time
+        if: steps.add_submodule.conclusion == 'success'
+        run: |
+          echo "{\"schemaVersion\": 1, \"label\": \"Last Successful Run\", \"message\": \"$(date -u)\", \"color\": \"success\"}" > .github/last_success.json
+          git add .github/last_success.json
+          git commit -m "Update last successful run time"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

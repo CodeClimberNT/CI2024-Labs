@@ -1,3 +1,8 @@
+![Workflow Status](https://github.com/CodeClimberNT/CI2024-Labs/actions/workflows/sync-repo.yml/badge.svg)
+
+_Last synced: ![Last Successful Run](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/CodeClimberNT/CI2024-Labs/main/.github/last_success.json)_
+
+
 # Computational Intelligence Labs 2024
 
 This repository is used to manage a fast access to all labs during the CI course
