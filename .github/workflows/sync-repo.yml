@@ -59,7 +59,7 @@ jobs:
       - name: Record last successful run time
         if: steps.add_submodule.conclusion == 'success'
         run: |
-          echo "{\"schemaVersion\": 1, \"label\": \"Last Last Synced\", \"message\": \"$(date -u)\", \"color\": \"success\"}" > .github/last_success.json
+          echo "{\"schemaVersion\": 1, \"label\": \"Last Synced\", \"message\": \"$(date -u)\", \"color\": \"success\"}" > .github/last_success.json
           git add .github/last_success.json
           git commit -m "Update last synced run time"
           git push
